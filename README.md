@@ -6,7 +6,7 @@
 
 Parquet Explorer is a web application that allows users to upload, store, and query Parquet files directly in the browser. It leverages blockchain technology for secure storage and WebAssembly for local-first data processing. This architecture allows for the analysis of surprisingly large datasets, despite the performance limitations of web browsers and the resource constraints inherent to the Internet Computer Protocol. This project is meant to demonstrate the feasibility of adapting familiar data formats and analysis tools such as Parquet and SQL for use in a fully decentralized blockchain application.
 
-## ✨ Features
+## ✅  Features
 
 - Upload and store Parquet files on-chain using [Juno Storage](https://juno.build/docs/build/storage)
 - Client-side query processing via [DuckDB WASM](https://duckdb.org/docs/api/wasm/overview)
@@ -86,7 +86,3 @@ For questions or feedback, please reach out:
 - [Juno](https://juno.build) for providing the hosting and development platform
 - [DuckDB](https://duckdb.org) for the powerful in-browser SQL engine
 - [Internet Computer](https://internetcomputer.org) for developing the underlying blockchain infrastructure
-
----
-
-Built with ❤️ using [Juno](https://juno.build)
