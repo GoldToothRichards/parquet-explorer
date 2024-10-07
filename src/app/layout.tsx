@@ -6,7 +6,10 @@ const jetBrainsMono = JetBrains_Mono({subsets: ['latin']});
 
 export const metadata: Metadata = {
   title: 'Parquet Explorer',
-  description: 'A browser-based SQL editor for the blockchain.'
+  description: 'A browser-based SQL editor for the blockchain.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
