@@ -5,7 +5,7 @@ export const Logout = () => {
     <button
       type="button"
       onClick={signOut}
-      className="dark:text-white flex items-center gap-2 mt-24 hover:text-lavender-blue-500 active:text-lavender-blue-400">
+      className="text-white flex items-center gap-2 mt-24 hover:text-lavender-blue-500 active:text-lavender-blue-400">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="16"

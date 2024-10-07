@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetBrainsMono.className} bg-white dark:bg-black`}>{children}</body>
+      <body className={`${jetBrainsMono.className} bg-black`}>{children}</body>
     </html>
   );
 }

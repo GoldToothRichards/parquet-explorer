@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className="mx-auto max-w-screen-2xl py-8 px-4 flex flex-col items-center justify-center gap-6 text-center dark:text-white">
+    <footer className="mx-auto max-w-screen-2xl py-8 px-4 flex flex-col items-center justify-center gap-6 text-center text-white">
       <span className="flex gap-2 items-center">
         <small className="text-base font-medium">Built with:</small>
         <a

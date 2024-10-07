@@ -8,7 +8,7 @@ export const CloseButton: React.FC<CloseButtonProps> = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="absolute top-2 right-2 text-lavender-blue-500 hover:text-lavender-blue-600 p-1 rounded-full hover:bg-lavender-blue-100 dark:hover:bg-lavender-blue-800 transition-colors"
+      className="absolute top-2 right-2 text-lavender-blue-500 hover:text-lavender-blue-600 p-1 rounded-full hover:bg-lavender-blue-800 transition-colors"
       aria-label="Close"
     >
       <svg
