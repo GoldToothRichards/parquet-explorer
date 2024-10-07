@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
   content: [
@@ -35,7 +36,27 @@ const config: Config = {
         }
       }
     }
-  }
+  },
+  plugins: [
+    plugin(function({ addBase, theme }) {
+      addBase({
+        '::-webkit-scrollbar': {
+          width: '12px',
+        },
+        '::-webkit-scrollbar-track': {
+          background: theme('colors.lavender-blue.100'),
+        },
+        '::-webkit-scrollbar-thumb': {
+          background: theme('colors.lavender-blue.500'),
+          borderRadius: '6px',
+          border: `3px solid ${theme('colors.lavender-blue.100')}`,
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+          background: theme('colors.lavender-blue.600'),
+        },
+      });
+    }),
+  ],
 };
 
 export default config;
