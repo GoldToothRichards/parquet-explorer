@@ -87,7 +87,7 @@ For questions or feedback, please reach out:
 
 - [DuckDB](https://duckdb.org): An in-process SQL OLAP database management system. This project uses DuckDB's WebAssembly build to enable powerful in-browser SQL querying capabilities.
 
-- [Internet Computer](https://internetcomputer.org): The underlying blockchain infrastructure powering this application. The Internet Computer provides a decentralized cloud platform for building and hosting applications. Juno is an example of a decentralized application built on the Internet Computer.
+- [Internet Computer](https://internetcomputer.org): The underlying blockchain infrastructure powering this application. The Internet Computer provides a decentralized cloud platform for building and hosting applications.
 
 - [Parquet](https://parquet.apache.org/): An open source, column-oriented data file format designed for efficient data storage and retrieval. This project focuses on exploring and querying Parquet files.
 
