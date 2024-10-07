@@ -51,7 +51,7 @@ export const DeleteButton= ({ fileKey, filename, url, reload }: DeleteButtonProp
   return (
     <>
       <button
-        className="hover:text-red-500 transition-colors"
+        className="hover:text-red-500 transition-colors pr-1 py-1"
         onClick={deleteFile}
         title={`Delete ${filename}`}
       >

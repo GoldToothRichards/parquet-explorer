@@ -26,7 +26,7 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({ url, filename })
   return (
     <button
       onClick={handleDownload}
-      className="text-lavender-blue-500 hover:text-lavender-blue-300 p-1 rounded"
+      className="hover:text-blue-500 transition-colors px-2 py-1"
       title="Download file"
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
