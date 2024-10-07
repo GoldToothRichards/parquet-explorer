@@ -11,16 +11,20 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-          registry-url: "https://registry.npmjs.org"
+          cache: 'pnpm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy to Juno
         uses: junobuild/juno-action@main
