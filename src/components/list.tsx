@@ -96,12 +96,12 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({
                 </div>
               </div>
               {activeFileKey === file.key && activeModal && (
-                <div className="mt-4 w-full bg-lavender-blue-900 p-6 rounded-lg shadow-lg relative">
+                <div className="mt-4 w-full bg-lavender-blue-900 p-6 rounded-lg relative">
                   <div className="max-w-6xl mx-auto">
                     {activeModal === "metadata" && (
                       <>
-                        <h3 className="text-lg font-bold mb-2">
-                          Metadata for {file.data.filename}
+                        <h3 className="text-xl font-bold text-lavender-blue-100 mb-8">
+                          Metadata: {file.data.filename}
                         </h3>
                         <ParquetMetadataTable metadata={file.data.metadata} />
                       </>

@@ -120,19 +120,11 @@ export const QueryEditor: React.FC<QueryEditorProps> = ({ url, filename }) => {
     );
 
   return (
-    <div className="mt-2 bg-lavender-blue-900 p-2 rounded-lg shadow-lg">
-      <h3 className="text-xl font-bold text-lavender-blue-100 mb-4">
+    <div className="bg-lavender-blue-900 p-2">
+      <h3 className="text-xl font-bold text-lavender-blue-100 mb-8">
         Query Editor: {filename}
       </h3>
       {tableError && <p className="text-red-500 mb-2">{tableError}</p>}
-      {tableCreated && (
-        <p className="text-lavender-blue-200 mb-4">
-          Table name for this file:{" "}
-          <code className="bg-lavender-blue-800 px-2 py-1 rounded">
-            {tableName}
-          </code>
-        </p>
-      )}
       <div className="mb-4">
         <textarea
           value={query}
