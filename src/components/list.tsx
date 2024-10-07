@@ -2,7 +2,7 @@ import { AuthContext } from "@/components/auth";
 import { ParquetMetadataTable } from "@/components/metadata";
 import { DeleteButton } from "@/components/delete";
 import { DownloadButton } from "@/components/download";
-import { QueryExecutor } from "@/components/query";
+import { QueryEditor } from "@/components/query";
 import { listDocs } from "@junobuild/core-peer";
 import { useContext, useEffect, useState, useCallback } from "react";
 import React from "react";
@@ -107,7 +107,7 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({
                       </>
                     )}
                     {activeModal === "query" && (
-                      <QueryExecutor
+                      <QueryEditor
                         url={file.data.url}
                         filename={file.data.filename}
                       />

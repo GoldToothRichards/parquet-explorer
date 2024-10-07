@@ -4,12 +4,12 @@ import { QueryResultTable } from "@/components/results";
 
 const MAX_ROWS = 1000;
 
-interface QueryExecutorProps {
+interface QueryEditorProps {
   url: string;
   filename: string;
 }
 
-export const QueryExecutor: React.FC<QueryExecutorProps> = ({
+export const QueryEditor: React.FC<QueryEditorProps> = ({
   url,
   filename,
 }) => {
@@ -30,20 +30,33 @@ export const QueryExecutor: React.FC<QueryExecutorProps> = ({
         const rootFilename = filename
           .split(".")[0]
           .replace(/[^a-zA-Z0-9]/g, "_");
-        const uniqueTableName = `${rootFilename}_${Date.now()}`;
-        setTableName(uniqueTableName);
+        setTableName(rootFilename);
 
-        // Fetch the file content
-        const response = await fetch(url);
-        const blob = await response.blob();
-        const file = new File([blob], filename);
+        const conn = await db.connect();
+        try {
+          // Check if the table already exists
+          const tableExists = await conn.query(`
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_name = '${rootFilename}'
+          `);
 
-        // Insert the file into DuckDB
-        await insertFile(db, file, uniqueTableName);
+          if (tableExists.toArray().length === 0) {
+            // Fetch the file content
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const file = new File([blob], filename);
 
-        setTableCreated(true);
-        setTableError(null);
-        setQuery(`SELECT * FROM ${uniqueTableName} LIMIT 10`);
+            // Insert the file into DuckDB
+            await insertFile(db, file, rootFilename);
+          }
+
+          setTableCreated(true);
+          setTableError(null);
+          setQuery(`SELECT * FROM ${rootFilename} LIMIT 10`);
+        } finally {
+          await conn.close();
+        }
       } catch (error) {
         console.error("Error creating table:", error);
         setTableError(`Error creating table: ${error}`);
@@ -77,7 +90,7 @@ export const QueryExecutor: React.FC<QueryExecutorProps> = ({
           const countQuery = `SELECT COUNT(*) as count FROM (${query})`;
           const countResult = await conn.query(countQuery);
           const totalCount = parseInt(
-            countResult.getChild("count").toArray()[0],
+            countResult.getChild("count").toArray()[0]
           );
           setRowCount(totalCount);
 

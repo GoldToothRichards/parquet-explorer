@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useDuckDb, useDuckDbQuery, insertFile } from "duckdb-wasm-kit";
-import { Button } from "@/components/button";
+import React, { useRef, useState, useCallback } from "react";
+import { useDuckDb, insertFile } from "duckdb-wasm-kit";
 import * as duckdb from "@duckdb/duckdb-wasm";
 import { ParquetMetadataSchema, ParquetMetadata } from "@/types/parquet";
 import { ParquetMetadataTable } from "@/components/metadata";
@@ -11,20 +10,10 @@ export const FileSelector: React.FC<{
 }> = ({ onSaveComplete }) => {
   const [file, setFile] = useState<File | null>(null);
   const { db, loading: dbLoading, error: dbError } = useDuckDb();
-  const [query, setQuery] = useState<string>("");
-  const {
-    arrow: metadata,
-    loading: queryLoading,
-    error: queryError,
-  } = useDuckDbQuery(query);
+  const [parsedMetadata, setParsedMetadata] = useState<ParquetMetadata | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [parsedMetadata, setParsedMetadata] = useState<ParquetMetadata | null>(
-    null,
-  );
 
-  const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleFileUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = event.target.files?.[0];
     if (uploadedFile && db) {
       try {
@@ -32,17 +21,27 @@ export const FileSelector: React.FC<{
           uploadedFile.name,
           uploadedFile,
           duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
-          true,
+          true
         );
         setFile(uploadedFile);
-        const name = uploadedFile.name.replace(".parquet", "");
-        await insertFile(db, uploadedFile, name);
-        setQuery(`SELECT * FROM parquet_metadata('${uploadedFile.name}');`);
+        const tableName = uploadedFile.name.replace(/\.[^/.]+$/, ""); // Remove file extension
+        await insertFile(db, uploadedFile, tableName);
+        
+        // Fetch metadata
+        const conn = await db.connect();
+        try {
+          const result = await conn.query(`SELECT * FROM parquet_metadata('${uploadedFile.name}');`);
+          const metadata = result.toArray();
+          const parsedData = ParquetMetadataSchema.parse(metadata);
+          setParsedMetadata(parsedData);
+        } finally {
+          await conn.close();
+        }
       } catch (error) {
         console.error("Error analyzing file:", error);
       }
     }
-  };
+  }, [db]);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -53,18 +52,6 @@ export const FileSelector: React.FC<{
     setParsedMetadata(null);
     onSaveComplete(success);
   };
-
-  React.useEffect(() => {
-    if (metadata) {
-      try {
-        const parsedData = ParquetMetadataSchema.parse(metadata.toArray());
-        setParsedMetadata(parsedData);
-      } catch (error) {
-        console.error("Error parsing metadata:", error);
-        setParsedMetadata(null);
-      }
-    }
-  }, [metadata]);
 
   if (dbLoading) return <div>Loading DuckDB...</div>;
   if (dbError) return <div>Error loading DuckDB: {dbError.message}</div>;
@@ -103,14 +90,6 @@ export const FileSelector: React.FC<{
       {file && (
         <p className="text-lavender-blue-200 text-center">
           File selected: {file.name}
-        </p>
-      )}
-      {queryLoading && (
-        <p className="text-lavender-blue-600">Loading metadata...</p>
-      )}
-      {queryError && (
-        <p className="text-red-500">
-          Error loading metadata: {queryError.message}
         </p>
       )}
       {parsedMetadata && (

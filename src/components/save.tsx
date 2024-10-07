@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button } from "@/components/button";
 import { AuthContext } from "@/components/auth";
-import { setDoc, uploadFile } from "@junobuild/core-peer";
+import { setDoc, uploadFile, listDocs } from "@junobuild/core-peer";
 import { nanoid } from "nanoid";
 import { ParquetMetadata } from "@/types/parquet";
 import { Backdrop } from "@/components/backdrop";
@@ -26,12 +26,27 @@ export const SaveButton: React.FC<SaveButtonProps> = ({
     setSaving(true);
 
     try {
+      // Check for duplicate file names
+      const { items } = await listDocs({
+        collection: "metadata",
+        filter: {
+          matcher: {
+            key: `^${file.name}$`
+          }
+        }
+      });
+
+      if (items.length > 0) {
+        alert("A file with this name already exists. Please choose a different name.");
+        setSaving(false);
+        return;
+      }
+
       // Save the file blob to the 'files' collection using storage
-      const filename = `${user.key}-${file.name}`;
       const { downloadUrl } = await uploadFile({
         collection: "files",
         data: file,
-        filename: filename,
+        filename: file.name,
         headers: [
           ["Access-Control-Allow-Origin", "*"],
           ["Access-Control-Allow-Methods", "GET, HEAD, OPTIONS"],
@@ -40,11 +55,10 @@ export const SaveButton: React.FC<SaveButtonProps> = ({
       });
 
       // Save the metadata document to the 'metadata' collection using datastore
-      const metadataKey = nanoid();
       await setDoc({
         collection: "metadata",
         doc: {
-          key: metadataKey,
+          key: file.name,
           data: {
             filename: file.name,
             url: downloadUrl,
