@@ -34,7 +34,7 @@ export default function Home() {
             Parquet Explorer
           </h1>
           <h2 className="text-white text-2xl font-semibold mt-6 mb-4">A browser-based SQL editor for the blockchain</h2>
-          <ul className="text-white list-disc list-inside space-y-2 md:max-w-lg">
+          <ul className="text-white list-disc list-inside space-y-2 mb-8 md:max-w-lg">
             <li>
               Parquet files stored on-chain using{" "}
               <a
