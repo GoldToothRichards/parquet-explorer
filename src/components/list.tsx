@@ -1,12 +1,12 @@
-import { AuthContext } from '@/components/auth';
-import { ParquetMetadataTable } from '@/components/metadata';
-import { DeleteButton } from '@/components/delete';
-import { DownloadButton } from '@/components/download';
-import { QueryExecutor } from '@/components/query';
-import { listDocs } from '@junobuild/core-peer';
-import { useContext, useEffect, useState, useCallback } from 'react';
-import React from 'react';
-import { CloseButton } from '@/components/close';
+import { AuthContext } from "@/components/auth";
+import { ParquetMetadataTable } from "@/components/metadata";
+import { DeleteButton } from "@/components/delete";
+import { DownloadButton } from "@/components/download";
+import { QueryExecutor } from "@/components/query";
+import { listDocs } from "@junobuild/core-peer";
+import { useContext, useEffect, useState, useCallback } from "react";
+import React from "react";
+import { CloseButton } from "@/components/close";
 
 interface ParquetFileMetadata {
   key: string;
@@ -17,9 +17,11 @@ interface ParquetFileMetadata {
   };
 }
 
-type ActiveModal = 'metadata' | 'query' | null;
+type ActiveModal = "metadata" | "query" | null;
 
-export const FileList: React.FC<{ refreshTrigger: number }> = ({ refreshTrigger }) => {
+export const FileList: React.FC<{ refreshTrigger: number }> = ({
+  refreshTrigger,
+}) => {
   const { user } = useContext(AuthContext);
   const [files, setFiles] = useState<ParquetFileMetadata[]>([]);
   const [activeFileKey, setActiveFileKey] = useState<string | null>(null);
@@ -27,9 +29,9 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({ refreshTrigger 
 
   const listParquetFiles = useCallback(async () => {
     if (user) {
-      const { items } = await listDocs<ParquetFileMetadata['data']>({
-        collection: 'metadata',
-        filter: {}
+      const { items } = await listDocs<ParquetFileMetadata["data"]>({
+        collection: "metadata",
+        filter: {},
       });
       setFiles(items);
     } else {
@@ -69,15 +71,15 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({ refreshTrigger 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 py-3 border-lavender-blue-500 border-[3px] rounded bg-black text-white transition-all shadow-[4px_4px_0px_#7888FF]">
                 <span className="mb-2 sm:mb-0">{file.data.filename}</span>
                 <div className="flex flex-wrap items-center gap-2">
-                  <button 
+                  <button
                     className="text-lavender-blue-500 hover:text-lavender-blue-400 px-2 py-1 rounded border border-lavender-blue-500 hover:bg-lavender-blue-900"
-                    onClick={() => handleFileSelect(file.key, 'metadata')}
+                    onClick={() => handleFileSelect(file.key, "metadata")}
                   >
                     View Metadata
                   </button>
-                  <button 
+                  <button
                     className="text-lavender-blue-500 hover:text-lavender-blue-400 px-2 py-1 rounded border border-lavender-blue-500 hover:bg-lavender-blue-900"
-                    onClick={() => handleFileSelect(file.key, 'query')}
+                    onClick={() => handleFileSelect(file.key, "query")}
                   >
                     Query
                   </button>
@@ -96,14 +98,19 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({ refreshTrigger 
               {activeFileKey === file.key && activeModal && (
                 <div className="mt-4 w-full bg-lavender-blue-900 p-6 rounded-lg shadow-lg relative">
                   <div className="max-w-6xl mx-auto">
-                    {activeModal === 'metadata' && (
+                    {activeModal === "metadata" && (
                       <>
-                        <h3 className="text-lg font-bold mb-2">Metadata for {file.data.filename}</h3>
+                        <h3 className="text-lg font-bold mb-2">
+                          Metadata for {file.data.filename}
+                        </h3>
                         <ParquetMetadataTable metadata={file.data.metadata} />
                       </>
                     )}
-                    {activeModal === 'query' && (
-                      <QueryExecutor url={file.data.url} filename={file.data.filename} />
+                    {activeModal === "query" && (
+                      <QueryExecutor
+                        url={file.data.url}
+                        filename={file.data.filename}
+                      />
                     )}
                     <CloseButton onClick={closeModal} />
                   </div>

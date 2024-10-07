@@ -77,7 +77,7 @@ export const QueryExecutor: React.FC<QueryExecutorProps> = ({
           const countQuery = `SELECT COUNT(*) as count FROM (${query})`;
           const countResult = await conn.query(countQuery);
           const totalCount = parseInt(
-            countResult.getChild("count").toArray()[0]
+            countResult.getChild("count").toArray()[0],
           );
           setRowCount(totalCount);
 

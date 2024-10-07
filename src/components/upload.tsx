@@ -4,7 +4,9 @@ import { Backdrop } from "@/components/backdrop";
 import { FileSelector } from "@/components/select";
 import { CloseButton } from "@/components/close";
 
-export const UploadButton: React.FC<{ onUploadComplete: () => void }> = ({ onUploadComplete }) => {
+export const UploadButton: React.FC<{ onUploadComplete: () => void }> = ({
+  onUploadComplete,
+}) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleSaveComplete = (success: boolean) => {

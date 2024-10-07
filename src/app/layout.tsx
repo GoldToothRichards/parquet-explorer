@@ -1,19 +1,19 @@
-import type {Metadata} from 'next';
-import {JetBrains_Mono} from 'next/font/google';
-import './globals.css';
+import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
+import "./globals.css";
 
-const jetBrainsMono = JetBrains_Mono({subsets: ['latin']});
+const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Parquet Explorer',
-  description: 'A browser-based SQL editor for the blockchain.',
+  title: "Parquet Explorer",
+  description: "A browser-based SQL editor for the blockchain.",
   icons: {
-    icon: '/favicon.svg',
+    icon: "/favicon.svg",
   },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

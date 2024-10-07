@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { Button } from '@/components/button';
-import { AuthContext } from '@/components/auth';
-import { setDoc, uploadFile } from '@junobuild/core-peer';
-import { nanoid } from 'nanoid';
-import { ParquetMetadata } from '@/types/parquet';
-import { Backdrop } from '@/components/backdrop';
+import React, { useState, useContext } from "react";
+import { Button } from "@/components/button";
+import { AuthContext } from "@/components/auth";
+import { setDoc, uploadFile } from "@junobuild/core-peer";
+import { nanoid } from "nanoid";
+import { ParquetMetadata } from "@/types/parquet";
+import { Backdrop } from "@/components/backdrop";
 
 interface SaveButtonProps {
   file: File | null;
@@ -12,7 +12,11 @@ interface SaveButtonProps {
   onSaveComplete: (success: boolean) => void;
 }
 
-export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, onSaveComplete }) => {
+export const SaveButton: React.FC<SaveButtonProps> = ({
+  file,
+  parsedMetadata,
+  onSaveComplete,
+}) => {
   const [saving, setSaving] = useState<boolean>(false);
   const { user } = useContext(AuthContext);
 
@@ -25,7 +29,7 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, on
       // Save the file blob to the 'files' collection using storage
       const filename = `${user.key}-${file.name}`;
       const { downloadUrl } = await uploadFile({
-        collection: 'files',
+        collection: "files",
         data: file,
         filename: filename,
         headers: [
@@ -38,20 +42,20 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, on
       // Save the metadata document to the 'metadata' collection using datastore
       const metadataKey = nanoid();
       await setDoc({
-        collection: 'metadata',
+        collection: "metadata",
         doc: {
           key: metadataKey,
           data: {
             filename: file.name,
             url: downloadUrl,
-            metadata: parsedMetadata
-          }
-        }
+            metadata: parsedMetadata,
+          },
+        },
       });
 
       onSaveComplete(true);
     } catch (error) {
-      console.error('Error saving file and metadata:', error);
+      console.error("Error saving file and metadata:", error);
       onSaveComplete(false);
     }
 
@@ -60,11 +64,11 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, on
 
   return (
     <>
-      <Button 
-        onClick={handleSave} 
+      <Button
+        onClick={handleSave}
         disabled={!file || !parsedMetadata || saving}
       >
-        {saving ? 'Saving...' : 'Save File'}
+        {saving ? "Saving..." : "Save File"}
       </Button>
 
       {saving && <Backdrop spinner={true} />}

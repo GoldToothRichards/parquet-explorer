@@ -120,9 +120,10 @@ export const Footer = () => {
           </svg>
         </a>
       </div>
-      
+
       <p className="text-sm text-lavender-blue-100">
-        *This project is just a proof of concept. It is not intended for production use.*
+        *This project is just a proof of concept. It is not intended for
+        production use.*
       </p>
     </footer>
   );

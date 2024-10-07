@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   const handleUploadComplete = () => {
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   return (
@@ -33,7 +33,9 @@ export default function Home() {
           <h1 className="text-white text-5xl md:text-6xl font-bold tracking-tight md:pt-24">
             Parquet Explorer
           </h1>
-          <h2 className="text-white text-2xl font-semibold mt-6 mb-4">A browser-based SQL editor for the blockchain</h2>
+          <h2 className="text-white text-2xl font-semibold mt-6 mb-4">
+            A browser-based SQL editor for the blockchain
+          </h2>
           <ul className="text-white list-disc list-inside space-y-2 mb-8 md:max-w-lg">
             <li>
               Parquet files stored on-chain using{" "}
@@ -74,7 +76,6 @@ export default function Home() {
             <FileList refreshTrigger={refreshTrigger} />
             <UploadButton onUploadComplete={handleUploadComplete} />
           </Auth>
-
         </main>
 
         <Footer />
