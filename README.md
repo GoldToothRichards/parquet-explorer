@@ -2,7 +2,7 @@
 
 **A browser-based SQL editor for the blockchain.**
 
-Parquet Explorer is a web application that allows users to upload, store, and query Parquet files directly in the browser. It leverages blockchain technology for secure storage and WebAssembly for local-first data processing. This architecture allows for the analysis of surprisingly large datasets, despite the performance limitations of browser-based WebAssembly and the resource constraints of the underlying Internet Computer blockchain. This project is meant to demonstrate the feasibility of leveraging familiar data formats and data analysis tools in a blockchain context.
+Parquet Explorer is a web application that allows users to upload, store, and query Parquet files directly in the browser. It leverages blockchain technology for secure storage and WebAssembly for local-first data processing. This architecture allows for the analysis of surprisingly large datasets, despite the performance limitations of web browsers and the resource constraints of the Internet Computer blockchain. This project is meant to demonstrate the feasibility of leveraging familiar data formats and analysis tools in a blockchain context.
 
 ## ✨ Features
 
@@ -69,7 +69,7 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 This project is open source and available under the [MIT License](LICENSE).
 
-Much of the source code and styles from this project are borrowed from the [Juno NextJS example](https://github.com/junobuild/create-juno/tree/main/templates/nextjs-example) which is also open source and available under an MIT License.
+Much of the source code and styles from this project are borrowed from the [Juno Next.js example](https://github.com/junobuild/create-juno/tree/main/templates/nextjs-example) which is also open source and available under an MIT License.
 
 ## 📞 Contact
 
