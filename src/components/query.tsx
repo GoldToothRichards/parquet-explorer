@@ -112,7 +112,7 @@ export const QueryExecutor: React.FC<QueryExecutorProps> = ({
   return (
     <div className="mt-2 bg-lavender-blue-900 p-2 rounded-lg shadow-lg">
       <h3 className="text-xl font-bold text-lavender-blue-100 mb-4">
-        Query Executor: {filename}
+        Query Editor: {filename}
       </h3>
       {tableError && <p className="text-red-500 mb-2">{tableError}</p>}
       {tableCreated && (
