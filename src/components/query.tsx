@@ -14,7 +14,7 @@ export const QueryEditor: React.FC<QueryEditorProps> = ({ url, filename }) => {
   const [tableName, setTableName] = useState<string>("");
   const [tableCreated, setTableCreated] = useState(false);
   const [tableError, setTableError] = useState<string | null>(null);
-  const [queryResult, setQueryResult] = useState<any[] | null>(null);
+  const [queryResult, setQueryResult] = useState<unknown[] | null>(null);
   const [queryError, setQueryError] = useState<string | null>(null);
   const [isExecuting, setIsExecuting] = useState(false);
   const [rowCount, setRowCount] = useState<number | null>(null);
@@ -63,7 +63,13 @@ export const QueryEditor: React.FC<QueryEditorProps> = ({ url, filename }) => {
   }, [db, url, filename]);
 
   useEffect(() => {
-    createTable();
+    void (async () => {
+      try {
+        await createTable();
+      } catch (error) {
+        console.error("Error creating table:", error);
+      }
+    })();
   }, [createTable]);
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

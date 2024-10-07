@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button } from "@/components/button";
 
 interface QueryResultTableProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryResult: any[];
 }
 

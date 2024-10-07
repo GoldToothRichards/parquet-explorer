@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Button } from "@/components/button";
 import { AuthContext } from "@/components/auth";
 import { setDoc, uploadFile, listDocs } from "@junobuild/core-peer";
-import { nanoid } from "nanoid";
 import { ParquetMetadata } from "@/types/parquet";
 import { Backdrop } from "@/components/backdrop";
 
@@ -35,6 +34,8 @@ export const SaveButton: React.FC<SaveButtonProps> = ({
           },
         },
       });
+
+      console.log(`Metadata documents matching name ${file.name}:`, items);
 
       if (items.length > 0) {
         alert(

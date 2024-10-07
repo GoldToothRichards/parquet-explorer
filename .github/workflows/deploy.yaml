@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: List files
         run: ls -la

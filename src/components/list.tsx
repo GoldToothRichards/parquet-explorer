@@ -13,6 +13,7 @@ interface ParquetFileMetadata {
   data: {
     filename: string;
     url: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     metadata: any;
   };
 }
@@ -42,7 +43,13 @@ export const FileList: React.FC<{ refreshTrigger: number }> = ({
   }, [user]);
 
   useEffect(() => {
-    listParquetFiles();
+    void (async () => {
+      try {
+        await listParquetFiles();
+      } catch (error) {
+        console.error("Error listing Parquet files:", error);
+      }
+    })();
   }, [listParquetFiles, refreshTrigger]);
 
   const handleFileSelect = (key: string, modalType: ActiveModal) => {

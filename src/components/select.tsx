@@ -20,19 +20,34 @@ export const FileSelector: React.FC<{
       const uploadedFile = event.target.files?.[0];
       if (uploadedFile && db) {
         try {
-          await db.registerFileHandle(
-            uploadedFile.name,
-            uploadedFile,
-            duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
-            true,
-          );
-          setFile(uploadedFile);
           const tableName = uploadedFile.name.replace(/\.[^/.]+$/, ""); // Remove file extension
-          await insertFile(db, uploadedFile, tableName);
 
-          // Fetch metadata
+          // Check if the table already exists
           const conn = await db.connect();
           try {
+            const tableExists = await conn.query(`
+              SELECT table_name 
+              FROM information_schema.tables 
+              WHERE table_name = '${tableName}'
+            `);
+
+            if (tableExists.toArray().length > 0) {
+              alert(
+                "A file with this name has already been uploaded. Please choose a different file.",
+              );
+              return;
+            }
+
+            await db.registerFileHandle(
+              uploadedFile.name,
+              uploadedFile,
+              duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
+              true,
+            );
+            setFile(uploadedFile);
+            await insertFile(db, uploadedFile, tableName);
+
+            // Fetch metadata
             const result = await conn.query(
               `SELECT * FROM parquet_metadata('${uploadedFile.name}');`,
             );
@@ -44,6 +59,9 @@ export const FileSelector: React.FC<{
           }
         } catch (error) {
           console.error("Error analyzing file:", error);
+          alert(
+            "Error analyzing file. Please try again with a different file.",
+          );
         }
       }
     },
