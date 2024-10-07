@@ -81,8 +81,14 @@ For questions or feedback, please reach out:
 - LinkedIn: [Jacob Crabtree](https://www.linkedin.com/in/jacob-crabtree-7ab72610a/)
 - Twitter: [@crabtr26](https://x.com/crabtr26)
 
-## 🙏 Acknowledgements
+## 🔗 Links and Resources
 
-- [Juno](https://juno.build) for providing the hosting and development platform
-- [DuckDB](https://duckdb.org) for the powerful in-browser SQL engine
-- [Internet Computer](https://internetcomputer.org) for developing the underlying blockchain infrastructure
+- [Juno](https://juno.build): The hosting and development platform used for this project. Juno provides blockchain-based storage and hosting solutions, enabling decentralized application development.
+
+- [DuckDB](https://duckdb.org): An in-process SQL OLAP database management system. This project uses DuckDB's WebAssembly build to enable powerful in-browser SQL querying capabilities.
+
+- [Internet Computer](https://internetcomputer.org): The underlying blockchain infrastructure powering this application. The Internet Computer provides a decentralized cloud platform for building and hosting applications. Juno is an example of a decentralized application built on the Internet Computer.
+
+- [Parquet](https://parquet.apache.org/): An open source, column-oriented data file format designed for efficient data storage and retrieval. This project focuses on exploring and querying Parquet files.
+
+- [WebAssembly](https://webassembly.org/): A binary instruction format for a stack-based virtual machine, enabling high-performance applications on web pages. This project leverages WebAssembly for efficient data processing in the browser.
