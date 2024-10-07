@@ -9,7 +9,7 @@ import { Backdrop } from '@/components/backdrop';
 interface SaveButtonProps {
   file: File | null;
   parsedMetadata: ParquetMetadata | null;
-  onSaveComplete: () => void;
+  onSaveComplete: (success: boolean) => void;
 }
 
 export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, onSaveComplete }) => {
@@ -35,7 +35,6 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, on
         ],
       });
 
-
       // Save the metadata document to the 'metadata' collection using datastore
       const metadataKey = nanoid();
       await setDoc({
@@ -50,9 +49,10 @@ export const SaveButton: React.FC<SaveButtonProps> = ({ file, parsedMetadata, on
         }
       });
 
-      onSaveComplete();
+      onSaveComplete(true);
     } catch (error) {
       console.error('Error saving file and metadata:', error);
+      onSaveComplete(false);
     }
 
     setSaving(false);

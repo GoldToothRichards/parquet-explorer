@@ -4,8 +4,15 @@ import { Backdrop } from "@/components/backdrop";
 import { FileSelector } from "@/components/select";
 import { CloseButton } from "@/components/close";
 
-export const UploadButton = () => {
+export const UploadButton: React.FC<{ onUploadComplete: () => void }> = ({ onUploadComplete }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleSaveComplete = (success: boolean) => {
+    if (success) {
+      setShowModal(false);
+      onUploadComplete();
+    }
+  };
 
   return (
     <>
@@ -22,7 +29,7 @@ export const UploadButton = () => {
                 <h2 className="text-2xl font-bold mb-4">Upload Parquet File</h2>
                 <CloseButton onClick={() => setShowModal(false)} />
                 <div className="mb-4">
-                  <FileSelector />
+                  <FileSelector onSaveComplete={handleSaveComplete} />
                 </div>
               </div>
             </div>

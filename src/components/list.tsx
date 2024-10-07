@@ -19,12 +19,11 @@ interface ParquetFileMetadata {
 
 type ActiveModal = 'metadata' | 'query' | null;
 
-export const FileList = () => {
+export const FileList: React.FC<{ refreshTrigger: number }> = ({ refreshTrigger }) => {
   const { user } = useContext(AuthContext);
   const [files, setFiles] = useState<ParquetFileMetadata[]>([]);
   const [activeFileKey, setActiveFileKey] = useState<string | null>(null);
   const [activeModal, setActiveModal] = useState<ActiveModal>(null);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const listParquetFiles = useCallback(async () => {
     if (user) {
@@ -50,7 +49,6 @@ export const FileList = () => {
   };
 
   const handleDelete = useCallback(async () => {
-    setRefreshTrigger(prev => prev + 1);
     setActiveFileKey(null);
     setActiveModal(null);
     await listParquetFiles();

@@ -6,7 +6,7 @@ import { ParquetMetadataSchema, ParquetMetadata } from '@/types/parquet';
 import { ParquetMetadataTable } from '@/components/metadata';
 import { SaveButton } from '@/components/save';
 
-export const FileSelector: React.FC = () => {
+export const FileSelector: React.FC<{ onSaveComplete: (success: boolean) => void }> = ({ onSaveComplete }) => {
   const [file, setFile] = useState<File | null>(null);
   const { db, loading: dbLoading, error: dbError } = useDuckDb();
   const [query, setQuery] = useState<string>('');
@@ -38,9 +38,10 @@ export const FileSelector: React.FC = () => {
     fileInputRef.current?.click();
   };
 
-  const handleSaveComplete = () => {
+  const handleSaveComplete = (success: boolean) => {
     setFile(null);
     setParsedMetadata(null);
+    onSaveComplete(success);
   };
 
   React.useEffect(() => {

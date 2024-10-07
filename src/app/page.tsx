@@ -6,10 +6,12 @@ import { Footer } from "@/components/footer";
 import { FileList } from "@/components/list";
 import { UploadButton } from "@/components/upload";
 import { initSatellite } from "@junobuild/core-peer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 export default function Home() {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     (async () =>
@@ -19,6 +21,10 @@ export default function Home() {
         },
       }))();
   }, []);
+
+  const handleUploadComplete = () => {
+    setRefreshTrigger(prev => prev + 1);
+  };
 
   return (
     <>
@@ -59,8 +65,8 @@ export default function Home() {
           </p>
 
           <Auth>
-            <FileList />
-            <UploadButton />
+            <FileList refreshTrigger={refreshTrigger} />
+            <UploadButton onUploadComplete={handleUploadComplete} />
           </Auth>
 
         </main>
