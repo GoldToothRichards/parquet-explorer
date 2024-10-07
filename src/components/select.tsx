@@ -10,38 +10,45 @@ export const FileSelector: React.FC<{
 }> = ({ onSaveComplete }) => {
   const [file, setFile] = useState<File | null>(null);
   const { db, loading: dbLoading, error: dbError } = useDuckDb();
-  const [parsedMetadata, setParsedMetadata] = useState<ParquetMetadata | null>(null);
+  const [parsedMetadata, setParsedMetadata] = useState<ParquetMetadata | null>(
+    null,
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
-    if (uploadedFile && db) {
-      try {
-        await db.registerFileHandle(
-          uploadedFile.name,
-          uploadedFile,
-          duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
-          true
-        );
-        setFile(uploadedFile);
-        const tableName = uploadedFile.name.replace(/\.[^/.]+$/, ""); // Remove file extension
-        await insertFile(db, uploadedFile, tableName);
-        
-        // Fetch metadata
-        const conn = await db.connect();
+  const handleFileUpload = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const uploadedFile = event.target.files?.[0];
+      if (uploadedFile && db) {
         try {
-          const result = await conn.query(`SELECT * FROM parquet_metadata('${uploadedFile.name}');`);
-          const metadata = result.toArray();
-          const parsedData = ParquetMetadataSchema.parse(metadata);
-          setParsedMetadata(parsedData);
-        } finally {
-          await conn.close();
+          await db.registerFileHandle(
+            uploadedFile.name,
+            uploadedFile,
+            duckdb.DuckDBDataProtocol.BROWSER_FILEREADER,
+            true,
+          );
+          setFile(uploadedFile);
+          const tableName = uploadedFile.name.replace(/\.[^/.]+$/, ""); // Remove file extension
+          await insertFile(db, uploadedFile, tableName);
+
+          // Fetch metadata
+          const conn = await db.connect();
+          try {
+            const result = await conn.query(
+              `SELECT * FROM parquet_metadata('${uploadedFile.name}');`,
+            );
+            const metadata = result.toArray();
+            const parsedData = ParquetMetadataSchema.parse(metadata);
+            setParsedMetadata(parsedData);
+          } finally {
+            await conn.close();
+          }
+        } catch (error) {
+          console.error("Error analyzing file:", error);
         }
-      } catch (error) {
-        console.error("Error analyzing file:", error);
       }
-    }
-  }, [db]);
+    },
+    [db],
+  );
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();

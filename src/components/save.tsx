@@ -31,13 +31,15 @@ export const SaveButton: React.FC<SaveButtonProps> = ({
         collection: "metadata",
         filter: {
           matcher: {
-            key: `^${file.name}$`
-          }
-        }
+            key: `^${file.name}$`,
+          },
+        },
       });
 
       if (items.length > 0) {
-        alert("A file with this name already exists. Please choose a different name.");
+        alert(
+          "A file with this name already exists. Please choose a different name.",
+        );
         setSaving(false);
         return;
       }

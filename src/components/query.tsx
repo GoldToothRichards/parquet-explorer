@@ -9,10 +9,7 @@ interface QueryEditorProps {
   filename: string;
 }
 
-export const QueryEditor: React.FC<QueryEditorProps> = ({
-  url,
-  filename,
-}) => {
+export const QueryEditor: React.FC<QueryEditorProps> = ({ url, filename }) => {
   const [query, setQuery] = useState<string>("");
   const [tableName, setTableName] = useState<string>("");
   const [tableCreated, setTableCreated] = useState(false);
@@ -90,7 +87,7 @@ export const QueryEditor: React.FC<QueryEditorProps> = ({
           const countQuery = `SELECT COUNT(*) as count FROM (${query})`;
           const countResult = await conn.query(countQuery);
           const totalCount = parseInt(
-            countResult.getChild("count").toArray()[0]
+            countResult.getChild("count").toArray()[0],
           );
           setRowCount(totalCount);
 
