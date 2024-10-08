@@ -78,7 +78,6 @@ Much of the source code and styles from this project are borrowed from the [Juno
 For questions or feedback, please reach out:
 
 - Email: [crabtr26@proton.me](mailto:crabtr26@proton.me)
-- LinkedIn: [Jacob Crabtree](https://www.linkedin.com/in/jacob-crabtree-7ab72610a/)
 - Twitter: [@crabtr26](https://x.com/crabtr26)
 
 ## 🔗 Links and Resources
