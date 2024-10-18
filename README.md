@@ -24,15 +24,23 @@ Parquet Explorer is a web application that allows users to upload, store, and qu
 - **Authentication**: Internet Identity
 - **Deployment**: Juno Hosting
 
-## 🌟 Live Demo
+<!-- ## 🌟 Live Demo
 
 Experience Parquet Explorer in action:
 
-**[https://w6tkp-yaaaa-aaaal-amnwa-cai.icp0.io/](https://w6tkp-yaaaa-aaaal-amnwa-cai.icp0.io/)**
+**[https://w6tkp-yaaaa-aaaal-amnwa-cai.icp0.io/](https://w6tkp-yaaaa-aaaal-amnwa-cai.icp0.io/)** -->
+
+## 🎥 Demo
+
+A live demo is coming soon! In the meantime, here's a video demonstration of Parquet Explorer in action:
+
+![Parquet Explorer Demo](public/videos/demo.gif)
 
 ## 🚧 Project Status
 
 This project is currently a proof of concept and is not intended for production use.
+
+<!-- 🚨 **Warning:** You may upload files to test the application, but please be aware that the files may be destroyed at any time without notice. -->
 
 ## 🏗️ Local Development
 
