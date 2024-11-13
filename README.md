@@ -36,12 +36,6 @@ A live demo is coming soon! In the meantime, here's a video demonstration of Par
 
 ![Parquet Explorer Demo](public/videos/demo.gif)
 
-## 🚧 Project Status
-
-This project is currently a proof of concept and is not intended for production use.
-
-<!-- 🚨 **Warning:** You may upload files to test the application, but please be aware that the files may be destroyed at any time without notice. -->
-
 ## 🏗️ Local Development
 
 To set up the project locally:
@@ -71,22 +65,17 @@ This project is configured for automatic deployment to Juno hosting. The deploym
 
 Ensure that you have set up the `JUNO_TOKEN` secret in your GitHub repository settings. See [Juno Docs](https://juno.build/docs/guides/github-actions) for more information.
 
-## 🤝 Contributing
+## 🚧 Project Status
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue.
+This project is currently a proof of concept and is not intended for production use.
+
+<!-- 🚨 **Warning:** You may upload files to test the application, but please be aware that the files may be destroyed at any time without notice. -->
 
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
 Much of the source code and styles from this project are borrowed from the [Juno Next.js example](https://github.com/junobuild/create-juno/tree/main/templates/nextjs-example) which is also open source and available under an MIT License.
-
-## 📞 Contact
-
-For questions or feedback, please reach out:
-
-- Email: [crabtr26@proton.me](mailto:crabtr26@proton.me)
-- Twitter: [@crabtr26](https://x.com/crabtr26)
 
 ## 🔗 Links and Resources
 
