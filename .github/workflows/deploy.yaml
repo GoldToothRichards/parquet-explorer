@@ -34,6 +34,6 @@ jobs:
       - name: Deploy to Juno
         uses: junobuild/juno-action@main
         with:
-          args: deploy
+          args: deploy --headless 
         env:
           JUNO_TOKEN: ${{ secrets.JUNO_TOKEN }}
