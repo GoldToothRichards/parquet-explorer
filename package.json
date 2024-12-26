@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@duckdb/duckdb-wasm": "1.28.1-dev106.0",
-    "@junobuild/core-peer": "^0.0.27",
+    "@junobuild/core-peer": "^0.1.0",
     "duckdb-wasm-kit": "^0.1.38",
     "nanoid": "^5.0.7",
     "next": "14.2.7",
@@ -22,8 +22,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@junobuild/config": "^0.0.14",
-    "@junobuild/nextjs-plugin": "^0.0.12",
+    "@junobuild/config": "^0.0.17",
+    "@junobuild/nextjs-plugin": "^0.0.13",
     "@next/eslint-plugin-next": "^14.2.7",
     "@types/node": "^20",
     "@types/react": "^18",
