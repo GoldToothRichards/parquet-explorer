@@ -2,7 +2,7 @@ import { defineConfig } from "@junobuild/config";
 
 export default defineConfig({
   satellite: {
-    id: "ns2ql-qiaaa-aaaal-amqca-cai",
+    id: "qox35-uiaaa-aaaal-arskq-cai",
     source: "dist",
   },
 });
