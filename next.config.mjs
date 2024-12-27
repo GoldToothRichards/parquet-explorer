@@ -4,12 +4,9 @@ export default withJuno({
   juno: { container: true },
   nextConfig: {
     distDir: "dist",
+    output: "export",
     swcMinify: true,
     compress: true,
     optimizeFonts: true,
-    i18n: {
-      locales: ["en"],
-      defaultLocale: "en"
-    }
   },
 });
